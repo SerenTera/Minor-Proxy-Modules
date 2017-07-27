@@ -1,0 +1,29 @@
+Abnormality id				Description
+
+7777001-7777007				Self confidence potions 1day=7777001, 3day=7777003, (i guess 5 day-7777007, since thats what I logged from people around me)
+7777008-7777014				False Modesty potions. Untested, but should be these: 7777008,77770010,7777014.
+7000005					Shape Changer:Grow/Shrink //size changes with stacks number,4 for normal, 1,2,3-shrink and 5,6,7-grow
+7000001					Big head potions
+7000011					Big head potions
+
+806001					Expiring Anthrozombie Elixir(start)	
+806002					Expiring Anthrozombie Elixir(end)
+999001011				Beach Party Watermelon Blindfold
+
+-----------Above are derived by using the proper potions in game. Below are command derived using dispatches-----------------------------
+
+7000012						Chest changer	//Only Elastic armor version (?)
+7000013						Height changer	//Present version.
+7000014						Thighs changer  //Present version. no diff to 04
+7000015						Physical Change:Size //unused?
+7000002						Chest changer	//only works with swimwear version (?)
+7000003						Height changer	//Unused/old version?
+7000004						Thighs changer	//Unused/old version? No diff to 14
+
+7000016-7000018				size changer again? These seem to stack though. Maybe an older method of making size changers stack without stack count in abnormality packet.
+7000019-7000028				Alternating Self confidence-falsemodesty-selfconfidence-etc
+7000029-7000030				size changer, got bigger?
+7000031						big head
+
+8000015						1 day exp coupon.
+6002						Draconic Rex (dragon crit buff)
