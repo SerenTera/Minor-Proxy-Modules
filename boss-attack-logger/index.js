@@ -14,8 +14,8 @@ module.exports = function bossattacks(dispatch) {
 		bossinfo
 	
 	command.add('bosslogger', () => {
-		enabled = enabled ? false : true,
-		enabled ? command.message('(Bosslogger) Enabled') : command.message('(Bosslogger) Disabled')
+		enabled = !enabled
+		command.message(enabled ? '(Bosslogger) Enabled' : '(Bosslogger) Disabled')
 	})
 	
 
