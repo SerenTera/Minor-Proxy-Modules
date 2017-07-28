@@ -36,3 +36,12 @@ module.exports = function playerfinder(dispatch) {
 		}
 	})
 	
+	
+	function finder(nametofind,i) {
+		dispatch.toServer('C_REQUEST_USER_PAPERDOLL_INFO',1, {
+			name:namestring
+		})
+		timer[i] = setTimeout(finder(nametofind,i), Interval_Duration)
+	}
+}
+	
