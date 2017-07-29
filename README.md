@@ -1,5 +1,5 @@
-# Minor-Proxy-Modules
-A collection of the random ass modules made for logging/fun/in process of making other modules/qol. Aka a miscellaneous folder.
+# Minor Proxy Modules
+A collection of the random ass modules made for logging/fun/in process of making other modules/qol. Aka a miscellaneous folder. Some of these are untested and should not even be shared or used.
 
 Each folder is a unique module in itself. Each folder should have its own readme as well
 
