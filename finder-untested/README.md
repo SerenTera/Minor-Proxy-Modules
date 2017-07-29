@@ -1,4 +1,4 @@
-# finder
+# finder (Untested)
 Finds player and notifies if player is online via ingame chat. Untested af, most likely has bugs or cannot even start, too lazy to check.
 
 Requires commands module by pinkie-pie
