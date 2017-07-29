@@ -1,6 +1,6 @@
 const Command = require('command')
 
-let enabled=false
+let enabled=true
 
 module.exports = function bosssummon(dispatch) {
 	const command = Command(dispatch)
@@ -31,7 +31,7 @@ module.exports = function bosssummon(dispatch) {
 	
 	
 	//////Dispatches
-	dispatch.hook('S_LOGIN', 2, (event) => {
+	dispatch.hook('S_LOGIN', 2, event => {
 		cid = event.cid
 	})
 	
