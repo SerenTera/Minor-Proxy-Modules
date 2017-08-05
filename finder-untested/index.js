@@ -29,7 +29,7 @@ module.exports = function playerfinder(dispatch) {
 	dispatch.hook('S_USER_PAPERDOLL_INFO', 3, (event) => {
 		if(namestring.includes(event.name.toLowerCase())) {
 			indexvalue=namestring.indexOf(event.name.toLowerCase())
-			command.message('User '+ event.name.toLowerCase()+' is online.')
+			command.message('User '+ event.name+' is online.')
 			clearTimeout(timer[indexvalue])
 			timer.splice(indexvalue,1)
 			namestring.splice(indexvalue,1)
