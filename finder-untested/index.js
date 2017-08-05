@@ -5,6 +5,7 @@ module.exports = function playerfinder(dispatch) {
 	const command = Command(dispatch)
 	
 	let namestring=[],
+	    	timer,
 		interval,
 		indexvalue
 	
