@@ -13,9 +13,10 @@ module.exports = function testmsg(dispatch) {
 		console.log(str)
 	})
 	
-	command.add('cmdmessage', str => {
-		message(str)
-		console.log(str)
+	command.add('cmdmessage', (str,ch) => {
+		if(ch===undefined) ch=24
+		message(str,ch)
+		console.log(str,ch)
 	})
 	
 	command.add('cmdnoticeex', (str,unk1,unk2,unk3) => {
