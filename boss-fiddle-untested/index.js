@@ -6,6 +6,7 @@ module.exports = function bosssummon(dispatch) {
 	const command = Command(dispatch)
 	
 	let npccid=2222222,
+	    	model=0,
 		id=1111111,
 		bossloc={},
 		loc={},
@@ -17,12 +18,19 @@ module.exports = function bosssummon(dispatch) {
 		command.message(enabled ? '(Boss Fiddle) Enabled' : '(Boss Fiddle) Disabled')
 	})
 	
-	command.add('summon', (template,huntingZone) => { //summon <templateId> <huntingZoneId>
+	command.add('summon', (template,huntingZone) => { //summon huntingZoneId templateId
 		spawnNpc(parseInt(template),parseInt(huntingZone))
 	})
 	
-	command.add('summonskill', skillid => {
-		startskill(skillid)
+	command.add('summonskill', (skillid,stage) => { //summonskill skillid stage
+		if(stage===undefined) {
+			stage=0
+		}
+		startskill(skillid,stage)
+	})
+	
+	command.add('summonmodel', arg => {
+		model=parseInt(arg)
 	})
 	
 	command.add('summondespawn',() => {
@@ -46,16 +54,16 @@ module.exports = function bosssummon(dispatch) {
 	
 	
 	//////Functions
-	function startskill(skillid) {
+	function startskill(skillid,stage) {
 		dispatch.toClient('S_ACTION_STAGE',1, {
 			source:{ low: npccid, high: 0, unsigned: true },
 			x:bossloc.x,
 			y:bossloc.y,
 			z:bossloc.z,
 			w:bossloc.w,
-			model:1000,
+			model:model,
 			skill:skillid,
-			stage:0,
+			stage:stage,
 			speed:1,
 			id:id++,
 			unk:1,
@@ -78,7 +86,7 @@ module.exports = function bosssummon(dispatch) {
 		})
 	}
 
-	function spawnNpc(templateId,huntingZoneId)	{ 
+	function spawnNpc(huntingZoneId,templateId)	{ 
 		dispatch.toClient('S_SPAWN_NPC', 3, {
 			id: {low:npccid,high:0,unsigned:true}, //unique id, use high=0.
 			target: 0,
@@ -108,6 +116,7 @@ module.exports = function bosssummon(dispatch) {
 			unk20: 16777216,
 			unk25: 16777216				
 		})
+		model=templateId
 		Object.assign(bossloc,loc)
 	}
 }
