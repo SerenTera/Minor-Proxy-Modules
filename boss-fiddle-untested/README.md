@@ -6,7 +6,8 @@ Requires commands module. Change default enable in index.js (defaulted to false 
 Type in /proxy chat or prefix with '!' in other chats. Use space between arguments
 
 - `summontoggle`: Toggle enable/disable module
-- `summon <templateId> <huntingZoneId>`: Summon an entity based on the template and huntingzone IDs
+- `summon <huntingZoneId> <templateId>`: Summon an entity based on the template and huntingzone IDs
+- `summonmodel <modelnumber>`:Changes model id on S_ACTION_STAGE. Will be equal to summoned entity's templateId by default.
 - `summonskill <skillid>` : starts the skill on the summoned entity. skill id is the one used in S_ACTION_STAGE
 - `summondespawn`: Despawn the entity summoned
 
