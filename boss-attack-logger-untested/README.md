@@ -5,6 +5,7 @@ Logs every single bosses attacks in a file (will have repitition), with time sta
 Each new .json file is created when the date changes or the target boss changes (according to template and huntingzone ids). Module is by default enabled
 
 Currently logs: ACTION STAGE, DUNGEON EVENT MESSAGE, QUEST BALLOON, DUNGEON EVENT GAGE, ABNORMALITIES (begin only)
+
 Requires commands module by Pinkie-Pie
 
 ## Commands
