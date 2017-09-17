@@ -1,13 +1,16 @@
 const Command = require('command')
 
-let enabled=true
+let enabled=true,
+	SAFE_SPAWN=true
 
 module.exports = function bosssummon(dispatch) {
 	const command = Command(dispatch)
 	
 	let npccid=2222222,
-	    	model=0,
+	    model=0,
+		huntid=0,
 		id=1111111,
+		spawning=false,
 		bossloc={},
 		loc={},
 		cid
@@ -18,8 +21,8 @@ module.exports = function bosssummon(dispatch) {
 		command.message(enabled ? '(Boss Fiddle) Enabled' : '(Boss Fiddle) Disabled')
 	})
 	
-	command.add('summon', (template,huntingZone) => { //summon huntingZoneId templateId
-		spawnNpc(parseInt(template),parseInt(huntingZone))
+	command.add('summon', (huntingZone,template) => { //summon huntingZoneId templateId
+		spawnNpc(parseInt(huntingZone),parseInt(template))
 	})
 	
 	command.add('summonskill', (skillid,stage) => { //summonskill skillid stage
@@ -27,6 +30,21 @@ module.exports = function bosssummon(dispatch) {
 			stage=0
 		}
 		startskill(skillid,stage)
+	})
+	
+	command.add('summonabn', (id,stack) => {
+		if(stack===undefined) {
+			stack=1
+		}
+		startabn(parseInt(id),parseInt(stack))
+	})
+	
+	command.add('summonquest',msg => {
+		bossquest(msg)
+	})
+	
+	command.add('summoninfo', (arg1,arg2) => {
+		bossinfo(parseInt(arg1),parseInt(arg2))
 	})
 	
 	command.add('summonmodel', arg => {
@@ -52,6 +70,17 @@ module.exports = function bosssummon(dispatch) {
 		}
 	})
 	
+	dispatch.hook('S_LOAD_TOPO', 1, event => {
+		spawning = false
+	})
+	
+	dispatch.hook('C_MEET_BOSS_INFO', 1, event => {
+		if(spawning && SAFE_SPAWN) return false
+	})
+	
+	dispatch.hook('C_REQUEST_BOSS_GAGE_INFO', 'raw', () => {
+		if(spawning && SAFE_SPAWN) return false
+	})
 	
 	//////Functions
 	function startskill(skillid,stage) {
@@ -84,6 +113,7 @@ module.exports = function bosssummon(dispatch) {
 			target: npccid,
 			type: 1	
 		})
+		spawning=false
 	}
 
 	function spawnNpc(huntingZoneId,templateId)	{ 
@@ -117,6 +147,40 @@ module.exports = function bosssummon(dispatch) {
 			unk25: 16777216				
 		})
 		model=templateId
+		huntid=huntingZoneId
+		spawning=true
 		Object.assign(bossloc,loc)
 	}
+	
+	
+	function startabn(id,stack) {
+		dispatch.toClient('S_ABNORMALITY_BEGIN', 2, {
+			target: {low:npccid,high:0,unsigned:true}, //aim on yourself
+			source: {low:npccid,high:0,unsigned:true}, //from yourself
+			id:id,
+			duration: 10000,
+			unk:0,
+			stacks: stack,
+			unk2:0
+		})
+	}
+	
+	function bossquest(msg) {
+		dispatch.toClient('S_QUEST_BALLOON', 1, {
+			source:{low:npccid,high:0,unsigned:true},
+			message:msg
+		})
+	}
+	
+	function bossinfo(unk1,stack) {
+		dispatch.toClient('S_BOSS_BATTLE_INFO', 1, {
+			id:{low:npccid,high:0,unsigned:true},
+			huntingZoneId:huntid,
+			templateId:model,
+			unk1:unk1,
+			stack:stack
+		})
+	}
+	
+	
 }
