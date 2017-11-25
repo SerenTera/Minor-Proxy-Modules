@@ -12,4 +12,4 @@ Defaults to enter
 - arrayprop='String'		    	//Property Name of the array (the first word you see)
 - skipblank=true				      //Skips the entry if string is blank.        
 
-Currently edited to combine StrSheet_Item in data center to generate a JSON file to match item strings to their id.
+Currently edited to combine StrSheet_Item in data center to generate a JSON file to match item strings to their id. See attaced sample for output generated.
