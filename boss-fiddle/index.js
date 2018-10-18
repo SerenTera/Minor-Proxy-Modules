@@ -67,7 +67,7 @@ module.exports = function bosssummon(mod) {
 		cid = event.gameId
 	})
 	
-	mod.hook('C_PLAYER_LOCATION', 3, event =>{
+	mod.hook('C_PLAYER_LOCATION', 5, event =>{
 		if(enabled) {
 			locw= event.w
 			loc = event.loc	
@@ -84,7 +84,7 @@ module.exports = function bosssummon(mod) {
 	
 	//////Functions
 	function startskill(skillid,stage,skillModel,type) {
-		mod.send('S_ACTION_STAGE',mod.majorPatchVersion >= 74 ? 7 : 6, {
+		mod.send('S_ACTION_STAGE',8, {
 			gameId:{ low: npccid, high: 0, unsigned: true },
 			loc: bossloc,
 			w: bosslocw,
@@ -110,14 +110,14 @@ module.exports = function bosssummon(mod) {
 
 	
 	function despawnNpc(){
-		mod.send('S_DESPAWN_NPC', 1, {
-			target: npccid,
+		mod.send('S_DESPAWN_NPC', 3, {
+			gameId: npccid,
 			type: 1	
 		})
 	}
 
 	function spawnNpc(huntingZoneId,templateId,unk1)	{ 
-		mod.send('S_SPAWN_NPC', 9, {
+		mod.send('S_SPAWN_NPC', 10, {
 			gameId: {low:npccid,high:0,unsigned:true}, //unique id, use high=0.
 			target: 0,
 			loc: loc,
@@ -159,7 +159,7 @@ module.exports = function bosssummon(mod) {
 	
 	
 	function startselfabn(id,stack) {
-		mod.send('S_ABNORMALITY_BEGIN', 2, {
+		mod.send('S_ABNORMALITY_BEGIN', 3, {
 			target: cid, //aim on yourself
 			source: cid, //from yourself
 			id:id,
@@ -171,7 +171,7 @@ module.exports = function bosssummon(mod) {
 	}
 	
 	function startabn(id,stack) {
-		mod.send('S_ABNORMALITY_BEGIN', 2, {
+		mod.send('S_ABNORMALITY_BEGIN', 3, {
 			target: {low:npccid,high:0,unsigned:true}, //aim on yourself
 			source: {low:npccid,high:0,unsigned:true}, //from yourself
 			id:id,
@@ -189,15 +189,7 @@ module.exports = function bosssummon(mod) {
 		})
 	}
 	
-	function bossinfo(unk1,stack) {
-		mod.send('S_BOSS_BATTLE_INFO', 1, {
-			id:{low:npccid,high:0,unsigned:true},
-			huntingZoneId:huntid,
-			templateId:model,
-			unk1:unk1,
-			stack:stack
-		})
-	}
+
 	
 	function bossgage(id,hz,temp) {
 		mod.send('S_BOSS_GAGE_INFO', 3, {
