@@ -98,6 +98,7 @@ module.exports = function bosssummon(mod) {
 				}),
 			stage:stage,
 			speed:1,
+			projectileSpeed: 1,
 			id:id++,
 			unk1:1,
 			unk2:0,
@@ -111,7 +112,7 @@ module.exports = function bosssummon(mod) {
 	
 	function despawnNpc(){
 		mod.send('S_DESPAWN_NPC', 3, {
-			gameId: npccid,
+			gameId: {low:npccid,high:0,unsigned:true},
 			type: 1	
 		})
 	}
